@@ -1893,6 +1893,20 @@ namespace KeySAV2
             string isshiny = ""; if (data.isshiny) isshiny = "★";
             string isegg = ""; if (data.isegg) isegg = "✓";
 
+            if (!data.isegg) ESV = "";
+            if (data.eggmove1 == 0) eggmove1 = "";
+            if (data.eggmove2 == 0) eggmove2 = "";
+            if (data.eggmove3 == 0) eggmove3 = "";
+            if (data.eggmove4 == 0) eggmove4 = "";
+
+            //ExtraBonus (implemented with code from PKHeX)
+            int exp = Convert.ToInt32(data.exp);
+            string level = getLevel(Convert.ToInt32(data.species), exp).ToString();
+            string region = setregion(data.gamevers);
+            string country = setcountry(data.countryID);
+
+            if (data.isegg) level = "";
+
             // Vivillon Forms...
             if (data.species >= 664 && data.species <= 666)
                 species += "-" + vivlist[data.altforms];
@@ -1914,8 +1928,8 @@ namespace KeySAV2
             }
             if (CB_ExportStyle.SelectedIndex == 6)
             {
-                csvdata += String.Format("{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}\r\n",
-                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg);
+                csvdata += String.Format("{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}, {36}, {37}, {38}\r\n",
+                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country);
             }
             if (CB_ExportStyle.SelectedIndex == 7)
             {
@@ -1937,13 +1951,13 @@ namespace KeySAV2
                     ESV = "[" + ESV + "]";
                 }
             }
-            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg);
+            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country);
 
             RTB_VID.AppendText(result + "\r\n");
         } // BV
         private void dumpBV(object sender, EventArgs e)
         {
-            csvheader = "Position,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg move 1, Egg move 2, Egg move 3, Egg move 4, Shiny, Egg, Level";
+            csvheader = "Position,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg move 1, Egg move 2, Egg move 3, Egg move 4, Shiny, Egg, Level, Region, Country";
             csvdata = csvheader + "\r\n";
             RTB_VID.Clear();
             // player @ 0xX100, opponent @ 0x1800;
@@ -1960,7 +1974,7 @@ namespace KeySAV2
                 keyoff = 0x800;
             }
 
-            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg move 1", "Egg move 2", "Egg move 3", "Egg move 4", "Shiny", "Egg", "Level");
+            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg move 1", "Egg move 2", "Egg move 3", "Egg move 4", "Shiny", "Egg", "Level", "Region", "Country");
 
             // Add header if reddit
             if (CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || ((CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6) && CHK_R_Table.Checked))
