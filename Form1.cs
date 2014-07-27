@@ -1664,9 +1664,10 @@ namespace KeySAV2
             //ExtraBonus (implemented with code from PKHeX)
             int exp = Convert.ToInt32(data.exp);
             string level = getLevel(Convert.ToInt32(data.species), exp).ToString();
-            string region = setregion(data.gamevers);
-            string country = setcountry(data.countryID);
+            string region = getregion(data.gamevers);
+            string country = getcountry(data.countryID);
             string helditem = itemlist[data.helditem];
+            string language = getlanguage(data.otlang);
 
             if (data.helditem == 0) helditem = "";
             if (data.isegg) level = "";
@@ -1694,8 +1695,8 @@ namespace KeySAV2
             }
             if (CB_ExportStyle.SelectedIndex == 6)
             {
-                csvdata += String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}, {36}, {37}, {38}, {39}\r\n",
-                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem);
+                csvdata += String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}, {36}, {37}, {38}, {39}, {40}\r\n",
+                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem, language);
             }
             if (CB_ExportStyle.SelectedIndex == 7)
             {
@@ -1718,7 +1719,7 @@ namespace KeySAV2
                     ESV = "[" + ESV + "]";
                 }
             }
-            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem);
+            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem, language);
 
             if (ghost && CHK_MarkFirst.Checked) result = "~" + result;
             dumpedcounter++;
@@ -1726,7 +1727,7 @@ namespace KeySAV2
         }
         private void DumpSAV(object sender, EventArgs e)
         {
-            csvheader = "Box,Row,Column,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg Move 1,Egg Move 2,Egg Move 3,Egg Move 4,Shiny,Egg,Level,Region,Country,Held Item";
+            csvheader = "Box,Row,Column,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg Move 1,Egg Move 2,Egg Move 3,Egg Move 4,Shiny,Egg,Level,Region,Country,Held Item,Language";
             csvdata = csvheader + "\r\n";
             RTB_SAV.Clear();
             dumpedcounter = 0;
@@ -1770,7 +1771,7 @@ namespace KeySAV2
                 boxstart = Convert.ToInt16(CB_BoxStart.Text);
             }
 
-            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg Move 1", "Egg Move 2", "Egg Move 3", "Egg Move 4", "Shiny", "Egg", "Level", "Region", "Country", "Held Item");
+            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg Move 1", "Egg Move 2", "Egg Move 3", "Egg Move 4", "Shiny", "Egg", "Level", "Region", "Country", "Held Item", "Language");
             if (CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || (CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6 && CHK_R_Table.Checked))
             {
                 int args = Regex.Split(RTB_OPTIONS.Text, "{").Length;
@@ -1904,9 +1905,10 @@ namespace KeySAV2
             //ExtraBonus (implemented with code from PKHeX)
             int exp = Convert.ToInt32(data.exp);
             string level = getLevel(Convert.ToInt32(data.species), exp).ToString();
-            string region = setregion(data.gamevers);
-            string country = setcountry(data.countryID);
+            string region = getregion(data.gamevers);
+            string country = getcountry(data.countryID);
             string helditem = itemlist[data.helditem];
+            string language = getlanguage(data.otlang);
 
             if (data.helditem == 0) helditem = "";
             if (data.isegg) level = "";
@@ -1932,8 +1934,8 @@ namespace KeySAV2
             }
             if (CB_ExportStyle.SelectedIndex == 6)
             {
-                csvdata += String.Format("{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}, {36}, {37}, {38}, {39}\r\n",
-                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem);
+                csvdata += String.Format("{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},{30},{31},{32},{33},{34},{35}, {36}, {37}, {38}, {39}, {40}\r\n",
+                    box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem, language);
             }
             if (CB_ExportStyle.SelectedIndex == 7)
             {
@@ -1955,13 +1957,13 @@ namespace KeySAV2
                     ESV = "[" + ESV + "]";
                 }
             }
-            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem);
+            string result = String.Format(format, box, slot, species, gender, nature, ability, hp, atk, def, spa, spd, spe, hptype, ESV, TSV, nickname, otname, ball, TID, SID, ev_hp, ev_at, ev_de, ev_sa, ev_sd, ev_se, move1, move2, move3, move4, eggmove1, eggmove2, eggmove3, eggmove4, isshiny, isegg, level, region, country, helditem, language);
 
             RTB_VID.AppendText(result + "\r\n");
         } // BV
         private void dumpBV(object sender, EventArgs e)
         {
-            csvheader = "Position,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg Move 1,Egg Move 2,Egg Move 3,Egg Move 4,Shiny,Egg,Level,Region,Country,Held Item";
+            csvheader = "Position,Species,Gender,Nature,Ability,HP IV,ATK IV,DEF IV,SPA IV,SPD IV,SPE IV,HP Type,ESV,TSV,Nickname,OT,Ball,TID,SID,HP EV,ATK EV,DEF EV,SPA EV,SPD EV,SPE EV,Move 1,Move 2,Move 3,Move 4,Egg Move 1,Egg Move 2,Egg Move 3,Egg Move 4,Shiny,Egg,Level,Region,Country,Held Item,Language";
             csvdata = csvheader + "\r\n";
             RTB_VID.Clear();
             // player @ 0xX100, opponent @ 0x1800;
@@ -1978,7 +1980,7 @@ namespace KeySAV2
                 keyoff = 0x800;
             }
 
-            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg move 1", "Egg move 2", "Egg move 3", "Egg move 4", "Shiny", "Egg", "Level", "Region", "Country", "Held Item");
+            string header = String.Format(RTB_OPTIONS.Text, "Box", "Slot", "Species", "Gender", "Nature", "Ability", "HP", "ATK", "DEF", "SPA", "SPD", "SPE", "HiddenPower", "ESV", "TSV", "Nick", "OT", "Ball", "TID", "SID", "HP EV", "ATK EV", "DEF EV", "SPA EV", "SPD EV", "SPE EV", "Move 1", "Move 2", "Move 3", "Move 4", "Egg move 1", "Egg move 2", "Egg move 3", "Egg move 4", "Shiny", "Egg", "Level", "Region", "Country", "Held Item", "Language");
 
             // Add header if reddit
             if (CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || ((CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6) && CHK_R_Table.Checked))
@@ -2737,6 +2739,7 @@ namespace KeySAV2
                 +"{37} - Region\r\n"
                 +"{38} - Country\r\n"
                 +"{39} - Held Item\r\n"
+                +"{40} - Language\r\n"
                 ,"Help"
                 );
         }
@@ -2764,7 +2767,7 @@ namespace KeySAV2
                 CHK_R_Table.Visible = false;
                 CHK_BoldIVs.Visible = CHK_ColorBox.Visible = CB_BoxColor.Visible = true;
                 RTB_OPTIONS.ReadOnly = true; RTB_OPTIONS.Text =
-                "{34} | {2} ({15}) | {3} | {5} | {4} | {6}/{7}/{8}/{9}/{10}/{11} | {30} | {31} | {32} | {33} | {16} | {18} | {17} | {36} | {37} | {38}";
+                "{34} | {2} ({15}) | {3} | {5} | {4} | {6}/{7}/{8}/{9}/{10}/{11} | {30} | {31} | {32} | {33} | {16} | {18} | {17} | {36} | {37} | {40} ({38})";
             }
             else if (CB_ExportStyle.SelectedIndex == 2) // TSV
             {
@@ -3206,7 +3209,7 @@ namespace KeySAV2
             return 0;
         }
 
-        public string setcountry(int country)
+        public string getcountry(int country)
         {
             Dictionary<string, int> country_list = new Dictionary<string, int>();
                             country_list.Add("---", 0);
@@ -3337,7 +3340,7 @@ namespace KeySAV2
                 return result;
             }
 
-            public string setregion(int region)
+            public string getregion(int region)
             {
                 Dictionary<int, string> region_list = new Dictionary<int, string>();
                 region_list.Add(24, "Kalos"); //X
@@ -3359,6 +3362,21 @@ namespace KeySAV2
                 region_list.Add(15, "Orre"); //Colosseum/XD
 
                 string result = region_list[region];
+                return result;
+            }
+
+            public string getlanguage(int language)
+            {
+                Dictionary<int, string> language_list = new Dictionary<int, string>();
+                language_list.Add(2, "ENG"); //English
+                language_list.Add(1, "JPN"); //日本語
+                language_list.Add(3, "FRE"); //Français
+                language_list.Add(4, "ITA"); //Italiano
+                language_list.Add(5, "GER"); //Deutsch
+                language_list.Add(7, "ESP"); //Español
+                language_list.Add(8, "KOR"); //한국어
+
+                string result = language_list[language];
                 return result;
             }
         }
