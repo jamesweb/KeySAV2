@@ -2699,6 +2699,7 @@ namespace KeySAV2
         }
         private void B_ShowOptions_Click(object sender, EventArgs e)
         {
+
             Help help = new Help();
             help.Show();
 
@@ -2765,7 +2766,7 @@ namespace KeySAV2
             {
                 CHK_R_Table.Visible = false;
                 RTB_OPTIONS.ReadOnly = true; RTB_OPTIONS.Text =
-                    "{0} - {1} - {2} ({3}) - {4} - {5} - {6}.{7}.{8}.{9}.{10}.{11} - {12} - {13}";
+                    "{0} - {1} - {2} ({3}) - {4} - {5} - {6}/{7}/{8}/{9}/{10}/{11} - {12} - {13}";
             }
             else if (CB_ExportStyle.SelectedIndex == 1) // Reddit
             {
@@ -3367,23 +3368,23 @@ namespace KeySAV2
                 region_list.Add(15, "Orre"); //Colosseum/XD
 
                 Dictionary<int, string> game_list = new Dictionary<int, string>();
-                region_list.Add(24, "X"); //Kalos
-                region_list.Add(25, "Y"); //Kalos
-                region_list.Add(20, "White"); //Unova
-                region_list.Add(21, "Black"); //Unova
-                region_list.Add(22, "White 2"); //Unova
-                region_list.Add(23, "Black 2"); //Unova
-                region_list.Add(10, "Diamond"); //Sinnoh
-                region_list.Add(11, "Pearl"); //Sinnoh
-                region_list.Add(12, "Platinum"); //Sinnoh
-                region_list.Add(7, "Heart Gold"); //Johto
-                region_list.Add(8, "Soul Silver"); //Johto
-                region_list.Add(2, "Ruby"); //Hoenn
-                region_list.Add(1, "Sapphire"); //Hoenn
-                region_list.Add(3, "Emerald"); //Hoenn
-                region_list.Add(4, "Fire Red"); //Kanto
-                region_list.Add(5, "Leaf Green"); //Kanto
-                region_list.Add(15, "Colosseum/XD"); //Orre
+                game_list.Add(24, "X"); //Kalos
+                game_list.Add(25, "Y"); //Kalos
+                game_list.Add(20, "White"); //Unova
+                game_list.Add(21, "Black"); //Unova
+                game_list.Add(22, "White 2"); //Unova
+                game_list.Add(23, "Black 2"); //Unova
+                game_list.Add(10, "Diamond"); //Sinnoh
+                game_list.Add(11, "Pearl"); //Sinnoh
+                game_list.Add(12, "Platinum"); //Sinnoh
+                game_list.Add(7, "Heart Gold"); //Johto
+                game_list.Add(8, "Soul Silver"); //Johto
+                game_list.Add(2, "Ruby"); //Hoenn
+                game_list.Add(1, "Sapphire"); //Hoenn
+                game_list.Add(3, "Emerald"); //Hoenn
+                game_list.Add(4, "Fire Red"); //Kanto
+                game_list.Add(5, "Leaf Green"); //Kanto
+                game_list.Add(15, "Colosseum/XD"); //Orre
 
                 string result;
                 if (type == 0) result = region_list[region];
