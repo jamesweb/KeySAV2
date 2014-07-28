@@ -2701,7 +2701,13 @@ namespace KeySAV2
         {
 
             Help help = new Help();
-            help.Show();
+            help.Show(this);
+            if (help.StartPosition == FormStartPosition.CenterParent)
+            {
+                var x = Location.X + ((Width - help.Width) / 2) + 340;
+                var y = Location.Y + ((Height - help.Height) / 2) - 45;
+                help.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+            }
 
             /*MessageBox.Show(
                  "{0} - Box\r\n"

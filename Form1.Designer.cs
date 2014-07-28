@@ -672,7 +672,6 @@
             this.Controls.Add(this.CB_MainLanguage);
             this.Controls.Add(this.tab_Main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(700, 750);
             this.MinimumSize = new System.Drawing.Size(370, 370);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
