@@ -2699,8 +2699,8 @@ namespace KeySAV2
         }
         private void B_ShowOptions_Click(object sender, EventArgs e)
         {
-            Help test = new Help();
-            test.ShowDialog();
+            Help help = new Help();
+            help.Show();
 
             /*MessageBox.Show(
                  "{0} - Box\r\n"

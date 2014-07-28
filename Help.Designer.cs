@@ -62,6 +62,7 @@
             // Help
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(254, 292);
             this.Controls.Add(this.label2);
