@@ -88,6 +88,7 @@ namespace KeySAV2
         public string[] balls;
         public string[] formlist;
         public string[] vivlist;
+        public string[] unownlist;
 
         // Blank File Egg Names
         public string[] eggnames = { "タマゴ", "Egg", "Œuf", "Uovo", "Ei", "", "Huevo", "알" };
@@ -1677,6 +1678,10 @@ namespace KeySAV2
             if (data.species >= 664 && data.species <= 666)
                 species += "-" + vivlist[data.altforms];
 
+            // Unknown Forms
+            if (data.species == 201)
+                species += "-" + unownlist[data.altforms];
+
             if (((CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || (CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6)) && CHK_BoldIVs.Checked))
             {
                 if (hp == "31") hp = "**31**";
@@ -1917,6 +1922,9 @@ namespace KeySAV2
             // Vivillon Forms...
             if (data.species >= 664 && data.species <= 666)
                 species += "-" + vivlist[data.altforms];
+            // Unknown Forms
+            if (data.species == 201)
+                species += "-" + unownlist[data.altforms];
 
             if (((CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || (CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6)) && CHK_BoldIVs.Checked))
             {
@@ -2905,6 +2913,11 @@ namespace KeySAV2
             vivlist[0] = formlist[666];
             for (int i = 1; i < 20; i++)
                 vivlist[i] = formlist[835+i];
+            // unown list
+            unownlist = new string[29];
+            unownlist[0] = formlist[201];
+            for (int i = 1; i < 29; i++)
+                unownlist[i] = formlist[201 + i];
         }
 
         // Structs
