@@ -3122,7 +3122,9 @@ namespace KeySAV2
             MessageBox.Show("Copied to Backup Folder.\r\n\r\nFile named:\r\n" + newpath, "Alert");
         }
 
-        //I have no idea what I'm doing
+        //I have an idea of what I'm doing
+        //But it's not pretty
+
         private int getLevel(int species, int exp)
         {
             DataTable spectable = SpeciesTable();
@@ -3402,6 +3404,7 @@ namespace KeySAV2
             public string getlanguage(int language)
             {
                 Dictionary<int, string> language_list = new Dictionary<int, string>();
+                language_list.Add(0, "ERROR"); //Corrupt?
                 language_list.Add(2, "ENG"); //English
                 language_list.Add(1, "JPN"); //日本語
                 language_list.Add(3, "FRE"); //Français
