@@ -1637,10 +1637,10 @@ namespace KeySAV2
             string otname = data.ot;
             string TID = data.TID.ToString("00000");
             string SID = data.SID.ToString("00000");
-            string move1 = movelist[data.move1];
-            string move2 = movelist[data.move2];
-            string move3 = movelist[data.move3];
-            string move4 = movelist[data.move4];
+            string move1 = ""; if (data.move1 > 618) move1 = "ERROR"; else move1 = movelist[data.move1];
+            string move2 = ""; if (data.move2 > 618) move2 = "ERROR"; else move2 = movelist[data.move2];
+            string move3 = ""; if (data.move3 > 618) move3 = "ERROR"; else move3 = movelist[data.move3];
+            string move4 = ""; if (data.move4 > 618) move4 = "ERROR"; else move4 = movelist[data.move4];
             string ev_hp = data.HP_EV.ToString();
             string ev_at = data.ATK_EV.ToString();
             string ev_de = data.DEF_EV.ToString();
@@ -1649,18 +1649,18 @@ namespace KeySAV2
             string ev_se = data.SPE_EV.ToString();
 
             // Bonus
-            string eggmove1 = movelist[data.eggmove1].ToString();
-            string eggmove2 = movelist[data.eggmove2].ToString();
-            string eggmove3 = movelist[data.eggmove3].ToString();
-            string eggmove4 = movelist[data.eggmove4].ToString();
+            string eggmove1 = ""; if (data.eggmove1 > 618) eggmove1 = "ERROR"; else eggmove1 = movelist[data.eggmove1];
+            string eggmove2 = ""; if (data.eggmove2 > 618) eggmove2 = "ERROR"; else eggmove2 = movelist[data.eggmove2];
+            string eggmove3 = ""; if (data.eggmove3 > 618) eggmove3 = "ERROR"; else eggmove3 = movelist[data.eggmove3];
+            string eggmove4 = ""; if (data.eggmove4 > 618) eggmove4 = "ERROR"; else eggmove4 = movelist[data.eggmove4];
             string isshiny = ""; if (data.isshiny) isshiny = "★";
             string isegg = ""; if (data.isegg) isegg = "✓";
 
             if (!data.isegg) ESV = "";
-            if (data.eggmove1 == 0) eggmove1 = "";
-            if (data.eggmove2 == 0) eggmove2 = "";
-            if (data.eggmove3 == 0) eggmove3 = "";
-            if (data.eggmove4 == 0) eggmove4 = "";
+            if (data.eggmove1 == 0 || data.eggmove1 > 618) eggmove1 = "";
+            if (data.eggmove2 == 0 || data.eggmove1 > 618) eggmove2 = "";
+            if (data.eggmove3 == 0 || data.eggmove1 > 618) eggmove3 = "";
+            if (data.eggmove4 == 0 || data.eggmove1 > 618) eggmove4 = "";
 
             //ExtraBonus (implemented with code from PKHeX)
             int exp = Convert.ToInt32(data.exp);
