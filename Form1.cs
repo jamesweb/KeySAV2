@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +39,7 @@ namespace KeySAV2
             loadINI();
             this.FormClosing += onFormClose;
             InitializeStrings();
+
         }
         
         // Drag & Drop Events // 
@@ -122,6 +123,10 @@ namespace KeySAV2
         public byte[] video1 = new Byte[28256];
         public byte[] video2 = new Byte[28256];
 
+        // SV Checker
+        public string tsvList;
+        public string ESVMatch = "";
+
         #endregion
 
         // Utility
@@ -184,6 +189,34 @@ namespace KeySAV2
                         tr.Close();
                     }
                 }
+
+                if (File.Exists(datapath + "\\tsvs.ini"))
+                {
+                    try
+                    {
+                        string[] lines = Regex.Split(System.IO.File.ReadAllText(datapath + "\\tsvs.ini"), "\r\n");
+                        bool first = true;
+                        foreach (string line in lines)
+                        {
+                            if (line != "")
+                            {
+                                if (!first)
+                                {
+                                    string[] tsvs = line.Split(',');
+                                    ListViewItem item = lstTSV.FindItemWithText(tsvs[0]);
+                                    if (item == null)
+                                    {
+                                        lstTSV.Items.Add(tsvs[0].Trim());
+                                        lstTSV.Items[lstTSV.Items.Count - 1].SubItems.Add(tsvs[1].Trim());
+                                    }
+                                }
+                                first = false;
+                            }
+                        }
+                    }
+                    catch{}
+                }
+
             }
             catch {}
         }
@@ -233,6 +266,25 @@ namespace KeySAV2
                         tr.Close();
                     }
                 }
+
+                if (lstTSV.Items.Count > 0)
+                {
+                    foreach (ListViewItem item in lstTSV.Items)
+                    {
+                        for (int i = 1; i < item.SubItems.Count; i++)
+                        {
+                            if (item.ToString() != "")
+                            {
+                                tsvList += item.Text + "," + item.SubItems[i].Text + "\r\n";
+                                i++;
+                            }
+                        }
+                    }
+                    TextWriter list = new StreamWriter(datapath + "\\tsvs.ini");
+                    list.WriteLine(tsvList);
+                    list.Close();
+                }
+
             }
             catch
             {
@@ -1731,6 +1783,18 @@ namespace KeySAV2
             if (ghost && CHK_MarkFirst.Checked) result = "~" + result;
             dumpedcounter++;
             RTB_SAV.AppendText(result + "\r\n");
+
+            if (ESV != "" && !(CB_ExportStyle.SelectedIndex == 1 || CB_ExportStyle.SelectedIndex == 2 || (CB_ExportStyle.SelectedIndex != 0 && CB_ExportStyle.SelectedIndex < 6 && CHK_R_Table.Checked)))
+            {
+                ListViewItem item = lstTSV.FindItemWithText(data.ESV.ToString("0000"));
+                 if (item != null)
+                 {
+                     ESVMatch += result + (lstTSV.Items[item.Index].SubItems[1].Text != "" ? " (" + lstTSV.Items[item.Index].SubItems[1].Text + ")" : "") +
+                        "\r\n";
+                     
+                 }
+           }
+
         }
         private void DumpSAV(object sender, EventArgs e)
         {
@@ -1847,6 +1911,15 @@ namespace KeySAV2
                     System.IO.File.WriteAllText(path, csvdata, Encoding.UTF8);
                 }
             }
+
+            if (ESVMatch != "")
+            {
+                DialogResult dialogResult = MessageBox.Show("Matched eggs: \r\n\r\n" + ESVMatch + "\r\nWould you like to copy this to the clipboard?", "ESV Match", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes) Clipboard.SetText(ESVMatch);
+            }
+
+            ESVMatch = "";
+            
         }
         // BV
         private void dumpPKX_BV(byte[] pkx, int slot)
@@ -3433,5 +3506,123 @@ namespace KeySAV2
                 string result = language_list[language];
                 return result;
             }
+
+            private void txtTSV_TextChanged(object sender, EventArgs e)
+            {
+                btnAdd.Enabled = (txtTSV.TextLength == 4 ? true : false);
+            }
+
+            private void txtTSV_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+                if (e.KeyChar == (char)13) btnAdd.PerformClick();
+            }
+
+            private void txtTSVName_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (e.KeyChar == (char)13) btnAdd.PerformClick();
+            }
+
+            private void btnAdd_Click(object sender, EventArgs e)
+            {
+                ListViewItem item = lstTSV.FindItemWithText(txtTSV.Text);
+
+                if (item != null)
+                {
+                    MessageBox.Show("That TSV has already been added.");
+                }
+                else
+                {
+                    btnAdd.Enabled = false;
+                    lstTSV.Items.Add(txtTSV.Text);
+                    lstTSV.Items[lstTSV.Items.Count - 1].SubItems.Add(txtTSVName.Text);
+                    txtTSV.Text = "";
+                    txtTSVName.Text = "";
+                    txtTSV.Focus();
+                }
+            }
+
+            private void btnRemove_Click(object sender, EventArgs e)
+            {
+                foreach (ListViewItem eachItem in lstTSV.SelectedItems) lstTSV.Items.Remove(eachItem);
+            }
+
+            private void btnTSVExport_Click(object sender, EventArgs e)
+            {
+                foreach (ListViewItem item in lstTSV.Items)
+                {
+                    for (int i = 1; i < item.SubItems.Count; i++)
+                    {
+                        if (item.ToString() != "")
+                        {
+                            tsvList += item.Text + "," + item.SubItems[i].Text + "\r\n";
+                            i++;
+                        }
+                    }
+                }
+
+                SaveFileDialog savecsv = new SaveFileDialog();
+                savecsv.Filter = "Spreadsheet|*.csv";
+                savecsv.FileName = "TSV List " + DateTime.Now.ToString("D");
+                if (savecsv.ShowDialog() == DialogResult.OK)
+                {
+                    string path = savecsv.FileName;
+                    System.IO.File.WriteAllText(path, "TSV,Name\r\n" + tsvList);
+                    //lblStatus.Text = "TSV list exported to CSV";
+                }
+                else
+                {
+                  // lblStatus.Text = "Didn't write to CSV";
+                }
+
+               //tsvList = "";
+            }
+
+            private void btnTSVImport_Click(object sender, EventArgs e)
+            {
+                OpenFileDialog importTSVs = new OpenFileDialog();
+                importTSVs.Filter = "Spreadsheet|*.csv";
+                if (importTSVs.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string[] lines = Regex.Split(System.IO.File.ReadAllText(importTSVs.FileName), "\r\n");
+                        bool first = true;
+
+                        if (lstTSV.Items.Count > 0)
+                        {
+                            DialogResult dialogResult = MessageBox.Show("Do you want to clear the current TSV list?", "Import TSVs", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.Yes) lstTSV.Items.Clear();
+                        }
+
+                        foreach (string line in lines)
+                        {
+                            if (line != "")
+                            {
+                                if (!first)
+                                {
+                                    string[] tsvs = line.Split(',');
+                                    ListViewItem item = lstTSV.FindItemWithText(tsvs[0]);
+                                    if (item == null)
+                                    {
+                                        lstTSV.Items.Add(tsvs[0].Trim());
+                                        lstTSV.Items[lstTSV.Items.Count - 1].SubItems.Add(tsvs[1].Trim());
+                                    }
+                                }
+                                first = false;
+                            }
+                        }
+                       // lblStatus.Text = "TSV list imported";
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Could not open CSV. Make sure the file is not currently open in any other program.");
+                    }
+
+                }
+            }
+
+
+
         }
     }
