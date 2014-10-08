@@ -1,4 +1,4 @@
-﻿namespace KeySAV2
+namespace KeySAV2
 {
     partial class Form1
     {
@@ -30,15 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tab_Main = new System.Windows.Forms.TabControl();
-            this.Tab_BV = new System.Windows.Forms.TabPage();
-            this.B_BKP_BV = new System.Windows.Forms.Button();
-            this.L_KeyBV = new System.Windows.Forms.Label();
-            this.L_BVTeam = new System.Windows.Forms.Label();
-            this.CB_Team = new System.Windows.Forms.ComboBox();
-            this.B_GoBV = new System.Windows.Forms.Button();
-            this.B_OpenVideo = new System.Windows.Forms.Button();
-            this.TB_BV = new System.Windows.Forms.TextBox();
-            this.RTB_VID = new System.Windows.Forms.RichTextBox();
             this.Tab_SAV = new System.Windows.Forms.TabPage();
             this.B_BKP_SAV = new System.Windows.Forms.Button();
             this.L_SAVStats = new System.Windows.Forms.Label();
@@ -72,13 +63,35 @@
             this.L_ExportStyle = new System.Windows.Forms.Label();
             this.CB_ExportStyle = new System.Windows.Forms.ComboBox();
             this.RTB_OPTIONS = new System.Windows.Forms.RichTextBox();
+            this.Tab_BV = new System.Windows.Forms.TabPage();
+            this.B_BKP_BV = new System.Windows.Forms.Button();
+            this.L_KeyBV = new System.Windows.Forms.Label();
+            this.L_BVTeam = new System.Windows.Forms.Label();
+            this.CB_Team = new System.Windows.Forms.ComboBox();
+            this.B_GoBV = new System.Windows.Forms.Button();
+            this.B_OpenVideo = new System.Windows.Forms.Button();
+            this.TB_BV = new System.Windows.Forms.TextBox();
+            this.RTB_VID = new System.Windows.Forms.RichTextBox();
+            this.Tab_TSVs = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnTSVImport = new System.Windows.Forms.Button();
+            this.btnTSVExport = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtTSVName = new System.Windows.Forms.TextBox();
+            this.lstTSV = new System.Windows.Forms.ListView();
+            this.TSV = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TSVName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtTSV = new System.Windows.Forms.TextBox();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.CB_MainLanguage = new System.Windows.Forms.ComboBox();
             this.CB_Game = new System.Windows.Forms.ComboBox();
             this.tab_Main.SuspendLayout();
-            this.Tab_BV.SuspendLayout();
             this.Tab_SAV.SuspendLayout();
             this.Tab_Options.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.Tab_BV.SuspendLayout();
+            this.Tab_TSVs.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab_Main
@@ -87,118 +100,15 @@
             this.tab_Main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tab_Main.Controls.Add(this.Tab_BV);
             this.tab_Main.Controls.Add(this.Tab_SAV);
             this.tab_Main.Controls.Add(this.Tab_Options);
+            this.tab_Main.Controls.Add(this.Tab_BV);
+            this.tab_Main.Controls.Add(this.Tab_TSVs);
             this.tab_Main.Location = new System.Drawing.Point(12, 12);
             this.tab_Main.Name = "tab_Main";
             this.tab_Main.SelectedIndex = 0;
             this.tab_Main.Size = new System.Drawing.Size(330, 313);
             this.tab_Main.TabIndex = 3;
-            // 
-            // Tab_BV
-            // 
-            this.Tab_BV.Controls.Add(this.B_BKP_BV);
-            this.Tab_BV.Controls.Add(this.L_KeyBV);
-            this.Tab_BV.Controls.Add(this.L_BVTeam);
-            this.Tab_BV.Controls.Add(this.CB_Team);
-            this.Tab_BV.Controls.Add(this.B_GoBV);
-            this.Tab_BV.Controls.Add(this.B_OpenVideo);
-            this.Tab_BV.Controls.Add(this.TB_BV);
-            this.Tab_BV.Controls.Add(this.RTB_VID);
-            this.Tab_BV.Location = new System.Drawing.Point(4, 22);
-            this.Tab_BV.Name = "Tab_BV";
-            this.Tab_BV.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_BV.Size = new System.Drawing.Size(322, 287);
-            this.Tab_BV.TabIndex = 0;
-            this.Tab_BV.Text = "BV";
-            this.Tab_BV.UseVisualStyleBackColor = true;
-            // 
-            // B_BKP_BV
-            // 
-            this.B_BKP_BV.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.B_BKP_BV.Location = new System.Drawing.Point(233, 51);
-            this.B_BKP_BV.Name = "B_BKP_BV";
-            this.B_BKP_BV.Size = new System.Drawing.Size(55, 20);
-            this.B_BKP_BV.TabIndex = 8;
-            this.B_BKP_BV.Text = "Backup BV";
-            this.B_BKP_BV.UseVisualStyleBackColor = true;
-            this.B_BKP_BV.Visible = false;
-            this.B_BKP_BV.Click += new System.EventHandler(this.B_BKP_BV_Click);
-            // 
-            // L_KeyBV
-            // 
-            this.L_KeyBV.AutoSize = true;
-            this.L_KeyBV.Location = new System.Drawing.Point(10, 32);
-            this.L_KeyBV.Name = "L_KeyBV";
-            this.L_KeyBV.Size = new System.Drawing.Size(0, 13);
-            this.L_KeyBV.TabIndex = 20;
-            // 
-            // L_BVTeam
-            // 
-            this.L_BVTeam.AutoSize = true;
-            this.L_BVTeam.Location = new System.Drawing.Point(85, 53);
-            this.L_BVTeam.Name = "L_BVTeam";
-            this.L_BVTeam.Size = new System.Drawing.Size(37, 13);
-            this.L_BVTeam.TabIndex = 19;
-            this.L_BVTeam.Text = "Team:";
-            // 
-            // CB_Team
-            // 
-            this.CB_Team.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CB_Team.Enabled = false;
-            this.CB_Team.FormattingEnabled = true;
-            this.CB_Team.Items.AddRange(new object[] {
-            "My Team",
-            "Opponent"});
-            this.CB_Team.Location = new System.Drawing.Point(128, 50);
-            this.CB_Team.Name = "CB_Team";
-            this.CB_Team.Size = new System.Drawing.Size(102, 21);
-            this.CB_Team.TabIndex = 7;
-            // 
-            // B_GoBV
-            // 
-            this.B_GoBV.Enabled = false;
-            this.B_GoBV.Location = new System.Drawing.Point(7, 48);
-            this.B_GoBV.Name = "B_GoBV";
-            this.B_GoBV.Size = new System.Drawing.Size(33, 23);
-            this.B_GoBV.TabIndex = 6;
-            this.B_GoBV.Text = "Go";
-            this.B_GoBV.UseVisualStyleBackColor = true;
-            this.B_GoBV.Click += new System.EventHandler(this.dumpBV);
-            // 
-            // B_OpenVideo
-            // 
-            this.B_OpenVideo.Location = new System.Drawing.Point(7, 8);
-            this.B_OpenVideo.Name = "B_OpenVideo";
-            this.B_OpenVideo.Size = new System.Drawing.Size(75, 23);
-            this.B_OpenVideo.TabIndex = 4;
-            this.B_OpenVideo.Text = "Open Video";
-            this.B_OpenVideo.UseVisualStyleBackColor = true;
-            this.B_OpenVideo.Click += new System.EventHandler(this.B_OpenVid_Click);
-            // 
-            // TB_BV
-            // 
-            this.TB_BV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TB_BV.Location = new System.Drawing.Point(88, 9);
-            this.TB_BV.Name = "TB_BV";
-            this.TB_BV.ReadOnly = true;
-            this.TB_BV.Size = new System.Drawing.Size(226, 20);
-            this.TB_BV.TabIndex = 5;
-            // 
-            // RTB_VID
-            // 
-            this.RTB_VID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RTB_VID.Location = new System.Drawing.Point(0, 77);
-            this.RTB_VID.Name = "RTB_VID";
-            this.RTB_VID.ReadOnly = true;
-            this.RTB_VID.Size = new System.Drawing.Size(320, 210);
-            this.RTB_VID.TabIndex = 31;
-            this.RTB_VID.Text = "";
-            this.RTB_VID.WordWrap = false;
             // 
             // Tab_SAV
             // 
@@ -627,6 +537,231 @@
             this.RTB_OPTIONS.ReadOnlyChanged += new System.EventHandler(this.changeReadOnly);
             this.RTB_OPTIONS.TextChanged += new System.EventHandler(this.changeFormatText);
             // 
+            // Tab_BV
+            // 
+            this.Tab_BV.Controls.Add(this.B_BKP_BV);
+            this.Tab_BV.Controls.Add(this.L_KeyBV);
+            this.Tab_BV.Controls.Add(this.L_BVTeam);
+            this.Tab_BV.Controls.Add(this.CB_Team);
+            this.Tab_BV.Controls.Add(this.B_GoBV);
+            this.Tab_BV.Controls.Add(this.B_OpenVideo);
+            this.Tab_BV.Controls.Add(this.TB_BV);
+            this.Tab_BV.Controls.Add(this.RTB_VID);
+            this.Tab_BV.Location = new System.Drawing.Point(4, 22);
+            this.Tab_BV.Name = "Tab_BV";
+            this.Tab_BV.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_BV.Size = new System.Drawing.Size(322, 287);
+            this.Tab_BV.TabIndex = 0;
+            this.Tab_BV.Text = "BV";
+            this.Tab_BV.UseVisualStyleBackColor = true;
+            // 
+            // B_BKP_BV
+            // 
+            this.B_BKP_BV.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.B_BKP_BV.Location = new System.Drawing.Point(233, 51);
+            this.B_BKP_BV.Name = "B_BKP_BV";
+            this.B_BKP_BV.Size = new System.Drawing.Size(55, 20);
+            this.B_BKP_BV.TabIndex = 8;
+            this.B_BKP_BV.Text = "Backup BV";
+            this.B_BKP_BV.UseVisualStyleBackColor = true;
+            this.B_BKP_BV.Visible = false;
+            this.B_BKP_BV.Click += new System.EventHandler(this.B_BKP_BV_Click);
+            // 
+            // L_KeyBV
+            // 
+            this.L_KeyBV.AutoSize = true;
+            this.L_KeyBV.Location = new System.Drawing.Point(10, 32);
+            this.L_KeyBV.Name = "L_KeyBV";
+            this.L_KeyBV.Size = new System.Drawing.Size(0, 13);
+            this.L_KeyBV.TabIndex = 20;
+            // 
+            // L_BVTeam
+            // 
+            this.L_BVTeam.AutoSize = true;
+            this.L_BVTeam.Location = new System.Drawing.Point(85, 53);
+            this.L_BVTeam.Name = "L_BVTeam";
+            this.L_BVTeam.Size = new System.Drawing.Size(37, 13);
+            this.L_BVTeam.TabIndex = 19;
+            this.L_BVTeam.Text = "Team:";
+            // 
+            // CB_Team
+            // 
+            this.CB_Team.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Team.Enabled = false;
+            this.CB_Team.FormattingEnabled = true;
+            this.CB_Team.Items.AddRange(new object[] {
+            "My Team",
+            "Opponent"});
+            this.CB_Team.Location = new System.Drawing.Point(128, 50);
+            this.CB_Team.Name = "CB_Team";
+            this.CB_Team.Size = new System.Drawing.Size(102, 21);
+            this.CB_Team.TabIndex = 7;
+            // 
+            // B_GoBV
+            // 
+            this.B_GoBV.Enabled = false;
+            this.B_GoBV.Location = new System.Drawing.Point(7, 48);
+            this.B_GoBV.Name = "B_GoBV";
+            this.B_GoBV.Size = new System.Drawing.Size(33, 23);
+            this.B_GoBV.TabIndex = 6;
+            this.B_GoBV.Text = "Go";
+            this.B_GoBV.UseVisualStyleBackColor = true;
+            this.B_GoBV.Click += new System.EventHandler(this.dumpBV);
+            // 
+            // B_OpenVideo
+            // 
+            this.B_OpenVideo.Location = new System.Drawing.Point(7, 8);
+            this.B_OpenVideo.Name = "B_OpenVideo";
+            this.B_OpenVideo.Size = new System.Drawing.Size(75, 23);
+            this.B_OpenVideo.TabIndex = 4;
+            this.B_OpenVideo.Text = "Open Video";
+            this.B_OpenVideo.UseVisualStyleBackColor = true;
+            this.B_OpenVideo.Click += new System.EventHandler(this.B_OpenVid_Click);
+            // 
+            // TB_BV
+            // 
+            this.TB_BV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TB_BV.Location = new System.Drawing.Point(88, 9);
+            this.TB_BV.Name = "TB_BV";
+            this.TB_BV.ReadOnly = true;
+            this.TB_BV.Size = new System.Drawing.Size(226, 20);
+            this.TB_BV.TabIndex = 5;
+            // 
+            // RTB_VID
+            // 
+            this.RTB_VID.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RTB_VID.Location = new System.Drawing.Point(0, 77);
+            this.RTB_VID.Name = "RTB_VID";
+            this.RTB_VID.ReadOnly = true;
+            this.RTB_VID.Size = new System.Drawing.Size(320, 210);
+            this.RTB_VID.TabIndex = 31;
+            this.RTB_VID.Text = "";
+            this.RTB_VID.WordWrap = false;
+            // 
+            // Tab_TSVs
+            // 
+            this.Tab_TSVs.Controls.Add(this.label2);
+            this.Tab_TSVs.Controls.Add(this.btnTSVImport);
+            this.Tab_TSVs.Controls.Add(this.btnTSVExport);
+            this.Tab_TSVs.Controls.Add(this.label5);
+            this.Tab_TSVs.Controls.Add(this.txtTSVName);
+            this.Tab_TSVs.Controls.Add(this.lstTSV);
+            this.Tab_TSVs.Controls.Add(this.btnAdd);
+            this.Tab_TSVs.Controls.Add(this.txtTSV);
+            this.Tab_TSVs.Controls.Add(this.btnRemove);
+            this.Tab_TSVs.Location = new System.Drawing.Point(4, 22);
+            this.Tab_TSVs.Name = "Tab_TSVs";
+            this.Tab_TSVs.Size = new System.Drawing.Size(322, 287);
+            this.Tab_TSVs.TabIndex = 3;
+            this.Tab_TSVs.Text = "TSVs";
+            this.Tab_TSVs.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(219, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 788;
+            this.label2.Text = "Name:";
+            // 
+            // btnTSVImport
+            // 
+            this.btnTSVImport.Location = new System.Drawing.Point(234, 185);
+            this.btnTSVImport.Name = "btnTSVImport";
+            this.btnTSVImport.Size = new System.Drawing.Size(65, 24);
+            this.btnTSVImport.TabIndex = 787;
+            this.btnTSVImport.Text = "Import";
+            this.btnTSVImport.UseVisualStyleBackColor = true;
+            this.btnTSVImport.Click += new System.EventHandler(this.btnTSVImport_Click);
+            // 
+            // btnTSVExport
+            // 
+            this.btnTSVExport.Location = new System.Drawing.Point(234, 155);
+            this.btnTSVExport.Name = "btnTSVExport";
+            this.btnTSVExport.Size = new System.Drawing.Size(65, 24);
+            this.btnTSVExport.TabIndex = 786;
+            this.btnTSVExport.Text = "Export";
+            this.btnTSVExport.UseVisualStyleBackColor = true;
+            this.btnTSVExport.Click += new System.EventHandler(this.btnTSVExport_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(219, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 784;
+            this.label5.Text = "TSV:";
+            // 
+            // txtTSVName
+            // 
+            this.txtTSVName.HideSelection = false;
+            this.txtTSVName.Location = new System.Drawing.Point(259, 57);
+            this.txtTSVName.MaxLength = 200;
+            this.txtTSVName.Name = "txtTSVName";
+            this.txtTSVName.Size = new System.Drawing.Size(57, 20);
+            this.txtTSVName.TabIndex = 782;
+            this.txtTSVName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTSVName_KeyPress);
+            // 
+            // lstTSV
+            // 
+            this.lstTSV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TSV,
+            this.TSVName});
+            this.lstTSV.FullRowSelect = true;
+            this.lstTSV.Location = new System.Drawing.Point(24, 4);
+            this.lstTSV.Name = "lstTSV";
+            this.lstTSV.Size = new System.Drawing.Size(189, 268);
+            this.lstTSV.TabIndex = 783;
+            this.lstTSV.UseCompatibleStateImageBehavior = false;
+            this.lstTSV.View = System.Windows.Forms.View.Details;
+            // 
+            // TSV
+            // 
+            this.TSV.Text = "TSV";
+            this.TSV.Width = 40;
+            // 
+            // TSVName
+            // 
+            this.TSVName.Text = "Name";
+            this.TSVName.Width = 100;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Enabled = false;
+            this.btnAdd.Location = new System.Drawing.Point(234, 91);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(65, 24);
+            this.btnAdd.TabIndex = 780;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // txtTSV
+            // 
+            this.txtTSV.HideSelection = false;
+            this.txtTSV.Location = new System.Drawing.Point(259, 31);
+            this.txtTSV.MaxLength = 4;
+            this.txtTSV.Name = "txtTSV";
+            this.txtTSV.Size = new System.Drawing.Size(57, 20);
+            this.txtTSV.TabIndex = 781;
+            this.txtTSV.TextChanged += new System.EventHandler(this.txtTSV_TextChanged);
+            this.txtTSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTSV_KeyPress);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(234, 121);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(65, 24);
+            this.btnRemove.TabIndex = 785;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
             // CB_MainLanguage
             // 
             this.CB_MainLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -677,14 +812,16 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KeySAV";
             this.tab_Main.ResumeLayout(false);
-            this.Tab_BV.ResumeLayout(false);
-            this.Tab_BV.PerformLayout();
             this.Tab_SAV.ResumeLayout(false);
             this.Tab_SAV.PerformLayout();
             this.Tab_Options.ResumeLayout(false);
             this.Tab_Options.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.Tab_BV.ResumeLayout(false);
+            this.Tab_BV.PerformLayout();
+            this.Tab_TSVs.ResumeLayout(false);
+            this.Tab_TSVs.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -736,6 +873,18 @@
         private System.Windows.Forms.CheckBox CHK_HideFirst;
         private System.Windows.Forms.Label L_instrSAV;
         private System.Windows.Forms.Label L_instrBV;
+        private System.Windows.Forms.TabPage Tab_TSVs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnTSVImport;
+        private System.Windows.Forms.Button btnTSVExport;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtTSVName;
+        private System.Windows.Forms.ListView lstTSV;
+        private System.Windows.Forms.ColumnHeader TSV;
+        private System.Windows.Forms.ColumnHeader TSVName;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.TextBox txtTSV;
+        private System.Windows.Forms.Button btnRemove;
 
     }
 }
